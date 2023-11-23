@@ -1,0 +1,15 @@
+theme = 'kanagawa'
+
+[editor]
+middle-click-paste = false
+line-number = 'relative'
+cursorline = true
+true-color = true
+
+[editor.cursor-shape]
+insert = "bar"
+
+[editor.whitespace.render]
+space = "all"
+tab = "all"
+newline = "none"
