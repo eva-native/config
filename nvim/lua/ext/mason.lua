@@ -13,7 +13,8 @@ mason_lsp.setup({
     "cmake",              -- LSP for CMake
     "rust_analyzer",      -- LSP for Rust
     "bashls",             -- LSP for Bash
-    "tsserver"            -- LSP for JS/TS
+    "tsserver",           -- LSP for JS/TS
+    "gopls"               -- LSP for Go
   }
 })
 
@@ -34,7 +35,8 @@ mason_lsp.setup_handlers({
 
 mason_dap.setup({
   ensure_installed = {
-    "codelldb"            -- DAP for C/C++
+    "codelldb",           -- DAP for C/C++
+    "delve"               -- DAP for Go
   },
 
   handlers = {

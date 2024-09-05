@@ -40,6 +40,7 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
       "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio",
       "jay-babu/mason-nvim-dap.nvim",
       "rcarriga/nvim-dap-ui",
       "p00f/clangd_extensions.nvim",
@@ -94,6 +95,7 @@ return {
       require "ext.lspkind"
     end
   },
+  { 'echasnovski/mini.icons', version = false },
   {
     "folke/which-key.nvim",
     lazy = true,
