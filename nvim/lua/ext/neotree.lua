@@ -1,16 +1,12 @@
-require("helpers")
-local neotree = require("neo-tree")
+local ok, neotree = pcall(require, 'neo-tree')
 
-neotree.setup({
+if not ok then
+  vim.notify('error while loading neo-tree', vim.log.levels.ERROR)
+  return
+end
+
+local config = {
   close_if_last_window = true,
-  name = {
-    trailing_slash = true,
-    use_git_status_colors = true,
-    highlight = "NeoTreeFileName",
-  },
-  window = {
-    width = 50,
-  },
   filesystem = {
     filtered_items = {
       visible = false,
@@ -25,45 +21,24 @@ neotree.setup({
       enabled = true,
     },
   },
-  icon = {
-    folder_closed = "",
-    folder_open = "",
-    folder_empty = "",
-    default = "*",
-    highlight = "NeoTreeFileIcon"
-  },
-  git_status = {
-    symbols = {
-      -- Change type
-      added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-      modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-      deleted   = "✖",-- this can only be used in the git_status source
-      renamed   = "",-- this can only be used in the git_status source
-      -- Status type
-      untracked = "",
-      ignored   = "",
-      unstaged  = "",
-      staged    = "",
-      conflict  = "",
-    }
-  },
   event_handlers = {
     {
       event = "file_opened",
       handler = function(file_path)
-        neotree.close_all()
+        require("neo-tree.command").execute({ action = "close" })
       end
-    }
-  },
-})
+    },
+  }
+}
 
-api.nvim_create_augroup("neotree", {})
-api.nvim_create_autocmd("UiEnter", {
-  desc = "Open Neotree automatically",
-  group = "neotree",
-  callback = function()
-    if fn.argc() == 0 then
-      cmd "Neotree position=current"
-    end
-  end,
-})
+neotree.setup(config)
+-- vim.api.nvim_create_augroup("neotree", {})
+-- vim.api.nvim_create_autocmd("UiEnter", {
+--   desc = "Open Neotree automatically",
+--   group = "neotree",
+--   callback = function()
+--     if vim.fn.argc() == 0 then
+--       vim.cmd "Neotree position=current"
+--     end
+--   end,
+-- })

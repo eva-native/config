@@ -1,5 +1,5 @@
-local autopairs = require("nvim-autopairs")
+local npairs = require('nvim-autopairs')
 
-autopairs.setup({
-  fast_wrap = {},
-})
+npairs.setup {
+  check_ts = true, -- Проверка Tree-sitter
+}

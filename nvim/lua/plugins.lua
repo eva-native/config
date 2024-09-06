@@ -1,106 +1,113 @@
-require("helpers")
-
 return {
+  { 'folke/lazy.nvim' },
   {
-    "rebelot/kanagawa.nvim",
+    'rebelot/kanagawa.nvim',
     lazy = false,
     priority = 1000,
     config = function()
-      require("ext.kanagawa")
+      require('ext.kanagawa')
     end
   },
   {
-    "nvim-lualine/lualine.nvim",
+    'goolord/alpha-nvim',
+    config = function()
+      require('ext.alpha')
+    end
+  },
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+      'MunifTanjim/nui.nvim',
+      -- '3rd/image.nvim', -- Optional image support in preview window: See `# Preview Mode` for more information
+    },
+    config = function()
+      require('ext.neotree')
+    end
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     lazy = false,
-    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require("ext.lualine")
+      require('ext.lualine')
     end
   },
   {
-    "nvim-treesitter/nvim-treesitter",
-    lazy = false,
-    build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
-    config = function()
-      require("ext.treesitter")
-    end
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
   },
   {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    config = function()
-      require("ext.autopairs")
-    end
-  },
-  {
-    "williamboman/mason.nvim",
-    build = ":MasonUpdate",
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.2',
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
-      "neovim/nvim-lspconfig",
-      "mfussenegger/nvim-dap",
-      "nvim-neotest/nvim-nio",
-      "jay-babu/mason-nvim-dap.nvim",
-      "rcarriga/nvim-dap-ui",
-      "p00f/clangd_extensions.nvim",
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
     },
     config = function()
-      require("ext.mason")
-      require("ext.dap")
+      require('ext.telescope')
     end
   },
   {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    config = function()
+      require('ext.treesitter')
+    end
+  },
+  {
+    'windwp/nvim-autopairs',
+    config = function()
+      require('ext.autopairs')
+    end
+  },
+  {
+    'williamboman/mason.nvim',
     dependencies = {
-      "L3MON4D3/LuaSnip",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-emoji",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "hrsh7th/cmp-nvim-lua",
+      'williamboman/mason-lspconfig.nvim',
+      'neovim/nvim-lspconfig',
+      'mfussenegger/nvim-dap',
+      'nvim-neotest/nvim-nio',
+      'jay-babu/mason-nvim-dap.nvim',
+      'rcarriga/nvim-dap-ui',
+      'p00f/clangd_extensions.nvim',
     },
     config = function()
-      require("ext.cmp")
+      require('ext.mason-lsp')
     end
   },
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
+    'hrsh7th/nvim-cmp',
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
-      "MunifTanjim/nui.nvim",
-    },
-    config = function ()
-      require "ext.neotree"
-    end
-  },
-  {
-    "nvim-telescope/telescope.nvim",
-    tag = "0.1.2",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
+      'L3MON4D3/LuaSnip',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+      'windwp/nvim-autopairs',
+      'hrsh7th/cmp-emoji',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-nvim-lua',
+      'onsails/lspkind-nvim',
     },
     config = function()
-      require("ext.telescope")
+      require('ext.cmp')
     end
   },
   {
-    'onsails/lspkind-nvim',
-    lazy = true,
+    'stevearc/conform.nvim',
     config = function()
-      require "ext.lspkind"
+      require('ext.conform')
     end
   },
-  { 'echasnovski/mini.icons', version = false },
-  {
-    "folke/which-key.nvim",
-    lazy = true,
-    config = function()
-      require("ext.whichkey")
-    end,
-  },
+  --  {
+  --    'akinsho/bufferline.nvim',
+  --    dependencies = { 'nvim-tree/nvim-web-devicons' },
+  --    version = '*',
+  --    config = function()
+  --      require('ext.bufferline')
+  --    end
+  --  }
 }

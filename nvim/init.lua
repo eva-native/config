@@ -1,7 +1,10 @@
-require("settings")
-require("lazy_bootstrap")
+require('settings')
 
-local lazy = require("lazy")
-lazy.setup("plugins")
+local ok, lazy = pcall(require, 'bootstrap_lazy')
+if not ok then
+  vim.notify('error while loading lazy.nvim', vim.log.levels.ERROR)
+  vim.fn.getchar()
+  return
+end
 
-require("keybindings")
+lazy.setup('plugins')

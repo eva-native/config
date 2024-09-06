@@ -1,27 +1,27 @@
-require('kanagawa').setup({
-  compile = false,             -- enable compiling the colorscheme
-  undercurl = true,            -- enable undercurls
-  commentStyle = { italic = true },
+local ok, kanagawa = pcall(require, 'kanagawa')
+
+if not ok then
+  vim.notify('error while loading kanagawa', vim.log.levels.ERROR)
+  return
+end
+
+kanagawa.setup({
+  compile = true,
+  undercurl = true,                 -- Включить поддержку undercurl
+  commentStyle = { italic = true }, -- Стиль комментариев
   functionStyle = {},
-  keywordStyle = { italic = true},
-  statementStyle = { bold = true },
+  keywordStyle = { italic = true }, -- Ключевые слова курсивом
+  statementStyle = { bold = true }, -- Операторы жирным шрифтом
   typeStyle = {},
-  transparent = true,         -- do not set background color
-  dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
-  terminalColors = true,       -- define vim.g.terminal_color_{0,17}
-  colors = {                   -- add/modify theme and palette colors
-    palette = {},
-    theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
-  },
-  overrides = function(colors) -- add/modify highlights
-    return {}
-  end,
-  theme = "wave",              -- Load "wave" theme when 'background' option is not set
-  background = {               -- map the value of 'background' option to a theme
-    dark = "wave",           -- try "dragon" !
-    light = "lotus"
-  },
+  transparent = true,               -- Прозрачный фон
+  dimInactive = false,              -- Отключать неактивные окна
+  terminalColors = true,            -- Поддержка цветов в терминале
+  colors = {},
+  theme = 'dragon',                 -- Load "wave" theme when 'background' option is not set
+  background = {
+    dark = 'wave',
+    light = 'lotus',
+  }
 })
 
--- setup must be called before loading
 vim.cmd("colorscheme kanagawa")
