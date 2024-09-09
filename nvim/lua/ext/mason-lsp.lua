@@ -4,13 +4,13 @@ local lspconfig = require('lspconfig')
 
 local lsp_keymap = require('keymaps.lsp')
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 mason_lsp.setup({
   ensure_installed = {
     'clangd',
     'gopls',
-    'tsserver',
+    'ts_ls',
     'cmake',
     'bashls',
     'pyright',
@@ -27,7 +27,7 @@ mason_lsp.setup_handlers({
     lspconfig[server_name].setup({
       on_attach = on_attach,
       flags = { debounce_text_changes = 150 },
-      capabilities = capabilities,
+      -- capabilities = capabilities,
     })
   end,
 
@@ -72,12 +72,12 @@ mason_lsp.setup_handlers({
         on_attach(_, bufnr)
       end,
       flags = { debounce_text_changes = 150 },
-      capabilities = capabilities,
+      -- capabilities = capabilities,
     })
   end,
   ['lua_ls'] = function()
     lspconfig.lua_ls.setup {
-      capabilities = capabilities,
+      -- capabilities = capabilities,
       on_attach = on_attach,
       flags = { debounce_text_changes = 150 },
       settings = {
