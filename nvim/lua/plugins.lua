@@ -79,21 +79,24 @@ return {
     end
   },
   {
+    'onsails/lspkind-nvim',
+    lazy = true,
+  },
+  {
     'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
     dependencies = {
       'L3MON4D3/LuaSnip',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
-      'windwp/nvim-autopairs',
       'hrsh7th/cmp-emoji',
       'hrsh7th/cmp-nvim-lsp-signature-help',
       'hrsh7th/cmp-nvim-lua',
-      'onsails/lspkind-nvim',
     },
     config = function()
-      require('ext.cmp')
+      require('ext.complite')
     end
   },
   {
@@ -138,12 +141,12 @@ return {
       require('dap-go').setup()
     end
   },
-  --  {
-  --    'akinsho/bufferline.nvim',
-  --    dependencies = { 'nvim-tree/nvim-web-devicons' },
-  --    version = '*',
-  --    config = function()
-  --      require('ext.bufferline')
-  --    end
-  --  }
+  {
+    'akinsho/bufferline.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    version = '*',
+    config = function()
+      require('ext.bufferline')
+    end
+  }
 }

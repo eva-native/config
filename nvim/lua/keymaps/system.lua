@@ -41,6 +41,7 @@ km.set('n', '<leader>/', ':noh<CR>', opts)
 km.set('n', '<leader>tt', ':split | terminal<CR>', opts)  -- Открыть терминал внизу
 km.set('n', '<leader>tv', ':vsplit | terminal<CR>', opts) -- Открыть терминал справа
 km.set('t', '<Esc>', '<C-\\><C-n>', opts)                 -- Выйти из терминала в нормальный режим
+km.set('t', '<Esc><Esc>', '<cmd>q<CR>', opts)                 -- Выйти из терминала в нормальный режим
 
 km.set('n', '<leader>ws', ':split<CR>', opts)             -- Горизонтальный сплит
 km.set('n', '<leader>wv', ':vsplit<CR>', opts)            -- Вертикальный сплит

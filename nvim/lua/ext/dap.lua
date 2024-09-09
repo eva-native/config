@@ -58,23 +58,33 @@ dap.adapters.cppdbg = {
   command = '/usr/bin/gdb',
 }
 
+dap.adapters.codelldb = {
+  type = 'server',
+  port = '${port}',
+  executable = {
+    command = '/home/uzxenvy/opt/codelldb/extension/adapter/codelldb',
+    args = { "--port", "${port}" },
+
+    -- On windows you may have to uncomment this:
+    -- detached = false,
+  }
+}
+
 dap.configurations.cpp = {
   {
     name = 'Launch',
-    type = 'cppdbg',
+    type = 'codelldb',
     request = 'launch',
-    program = '${file}',
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd()..'/', 'file')
+    end,
     cwd = '${workspaceFolder}',
-    stopOnEntry = true,
-    setupCommands = {
-      {
-        text = '-enable-pretty-printing',
-        description = 'Enable pretty printing',
-        ignoreFailures = false,
-      },
-    },
+    stopOnEntry = false,
   },
 }
+
+dap.configurations.c = dap.configurations.cpp
+dap.configurations.rust = dap.configurations.cpp
 
 dap.adapters.node2 = {
   type = 'executable',
@@ -114,7 +124,7 @@ dap.configurations.javascriptreact = {
     type = 'chrome',
     request = 'launch',
     name = 'Launch Chrome against localhost',
-    url = 'http://localhost:3000',  -- Укажи URL локального сервера
+    url = 'http://localhost:3000', -- Укажи URL локального сервера
     webRoot = '${workspaceFolder}',
   },
 }

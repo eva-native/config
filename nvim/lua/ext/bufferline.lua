@@ -1,5 +1,3 @@
-if true then return end
-
 local bufferline = require('bufferline')
 
 bufferline.setup {
@@ -10,7 +8,7 @@ bufferline.setup {
     separator_style = 'thin',
     diagnostics = 'nvim_lsp',
     custom_filter = function(buf, _)
-      if vim.bo[buf].filetype ~= 'NvimTree' then
+      if vim.bo[buf].filetype ~= 'neo-tree' then
         return true
       end
     end
