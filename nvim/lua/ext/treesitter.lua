@@ -21,7 +21,12 @@ ts.setup({
     'markdown',
     'vim',
     'vimdoc',
+    'python',
   },
+  modules = {},
+  sync_install = false,
+  auto_install = false,
+  ignore_install = { },
   highlight = {
     enable = true,                             -- Включить подсветку синтаксиса через Tree-sitter
     additional_vim_regex_highlighting = false, -- Использовать только Tree-sitter

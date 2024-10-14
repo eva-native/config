@@ -42,6 +42,7 @@ vim.opt.mouse = "a"
 
 vim.opt.list = true                 -- Включить отображение специальных символов
 vim.opt.listchars = { trail = '·', tab = '▸ ', extends = '⟩', precedes = '⟨', nbsp = '␣' }
+vim.opt.colorcolumn = "120"
 
 vim.opt.confirm = true              -- Подтверждать закрытие файлов с несохраненными изменениями
 vim.opt.autoread = true             -- Автоматически перечитывать файл, если он изменен извне
