@@ -7,7 +7,7 @@
     stateVersion = "24.05";
     packages = with pkgs; [
       nnn unzip zip xz
-      gcc gdb nodejs_22 python3 go
+      gcc gdb nodejs_22 python3
       python312Packages.pip
       black isort llvmPackages_19.clang-tools gotools stylua
       # nodePackages.prettier needed package update
