@@ -1,11 +1,19 @@
-import=[
+import = [
   "~/.config/alacritty/kanagawa.toml"
 ]
+
+[env]
+TERM = "xterm-256color"
+
 [window]
-opacity=0.80
-padding.x=5
-padding.y=5
+opacity = 0.85
 
 [font]
-normal.family="RobotoMono Nerd Font"
-size=11
+normal = { family = "SFMono Nerd Font", style = "Regular" }
+
+[keyboard]
+bindings = [
+  { key = "Q", mods = "Super", action = "Quit"},
+  { key = "C", mods = "Super", action = "Copy"},
+  { key = "V", mods = "Super", action = "Paste"},
+]

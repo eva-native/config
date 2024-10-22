@@ -57,7 +57,7 @@ dap.configurations.python = {
 dap.adapters.cppdbg = {
   id = 'cppdbg',
   type = 'executable',
-  command = '/usr/bin/gdb',
+  command = 'gdb',
 }
 
 dap.adapters.codelldb = {
