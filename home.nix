@@ -6,10 +6,11 @@
     homeDirectory = "/home/uzxenvy";
     stateVersion = "24.05";
     packages = with pkgs; [
-      nnn unzip zip xz
+      nnn unzip zip xz htop
       gcc gdb nodejs_22 python3
       python312Packages.pip
       black isort llvmPackages_19.clang-tools gotools stylua
+      qtcreator
       # nodePackages.prettier needed package update
       nmap wget
       hashcat hashcat-utils hcxtools
