@@ -1,25 +1,7 @@
 { config, pkgs, nixgl, ... }@inputs:
 let
   nixGLPkgs = nixgl.packages.${pkgs.system};
-  nixGLDefault = nixGLPkgs.nixGLDefault;
   nixGLWrap = pkg: config.lib.nixGL.wrap pkg;
-
-  packages = with pkgs; [
-    neovim
-    neofetch nnn unzip zip xz htop tmux
-    eza bat fzf ripgrep fd
-    nmap wget
-
-    wl-clipboard
-    gcc gdb nodejs_22 python3 python312Packages.pip
-    black isort llvmPackages_19.clang-tools gotools stylua
-    # nodePackages.prettier broken package
-    noto-fonts-cjk-sans
-  ];
-  appleFonts = with inputs.apple-fonts; [ sf-pro-nerd sf-mono-nerd ny-nerd ];
-  glPacakges = (builtins.map (pkg: nixGLWrap pkg) (with pkgs; [
-    alacritty nekoray
-  ]));
 in
 {
   nixpkgs.config = {
@@ -35,7 +17,19 @@ in
     homeDirectory = "/home/uzxenvy";
     stateVersion = "24.05";
 
-    packages = packages ++ appleFonts ++ glPacakges;
+    packages = (with pkgs; [
+      neovim neofetch nnn unzip zip xz htop tmux
+      eza bat fzf ripgrep fd nmap wget
+      wl-clipboard cmakeCurses extra-cmake-modules
+      gcc gdb nodejs_22 python3 python312Packages.pip
+      black isort llvmPackages_19.clang-tools gotools stylua
+      # nodePackages.prettier broken package
+      noto-fonts-cjk-sans
+    ]) ++ (with inputs.apple-fonts; [
+      sf-pro-nerd sf-mono-nerd ny-nerd
+    ]) ++ (builtins.map (pkg: nixGLWrap pkg) (with pkgs; [
+      alacritty nekoray
+    ]));
 
     shellAliases =
     let
@@ -49,6 +43,8 @@ in
       l  = "eza ${ezaDefaultArgs}";
       la = "eza ${ezaDefaultArgs} --all";
       "l." = "eza ${ezaDefaultArgs} --list-dirs .*";
+
+      tns = "tmux new-session -As $USER";
     };
 
     sessionVariables = {
@@ -82,6 +78,12 @@ in
       [[ -f /etc/profiles/per-user/user/etc/profile.d/hm-session-vars.sh ]] && . /etc/profiles/per-user/user/etc/profile.d/hm-session-vars.sh
       [[ -f ~/.nix-profile/etc/profile.d/hm-session-vars.sh ]] && . ~/.nix-profile/etc/profile.d/hm-session-vars.sh
       '';
+    };
+
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+      enableZshIntegration = true;
     };
 
     git = {
