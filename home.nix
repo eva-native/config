@@ -51,6 +51,10 @@ in
       EDITOR = "nvim";
       CPM_SOURCE_CACHE = "${config.xdg.cacheHome}/CPM";
     };
+
+    sessionPath = [
+      "$HOME/.local/bin"
+    ];
   };
 
   xdg = {
