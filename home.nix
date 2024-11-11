@@ -90,12 +90,6 @@ in
       enableZshIntegration = true;
     };
 
-    git = {
-      enable = true;
-      userName = "Eva Dunmire";
-      userEmail = "evadunmire@gmail.com";
-    };
-
     go = {
       enable = true;
 
