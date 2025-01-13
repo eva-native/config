@@ -1,14 +1,13 @@
-local dap = require('dap')
+local kh = require('keymaps.helpers')
+local dap, dapui = require('dap'), require('dapui')
 
-local km = vim.keymap.set
-local opts = { noremap = true, silent = true }
+kh.map('n', '<leader>du', dapui.toggle, kh.default_opts 'Toggle [D]ebug [U]I')
 
-km('n', '<leader>dd', dap.continue, opts)
-km('n', '<leader>db', dap.toggle_breakpoint, opts)
-km('n', '<leader>dr', dap.repl.open, opts)
-km('n', '<leader>dq', dap.terminate, opts)
+kh.map('n', '<leader>db', dap.toggle_breakpoint, kh.default_opts '[D] Toggle [B]reakpoint')
+kh.map('n', '<leader>dr', dap.repl.open, kh.default_opts '[D] Open [R]EPL')
 
-km('n', '<F5>', dap.continue, opts)
-km('n', '<F10>', dap.step_over, opts)
-km('n', '<F11>', dap.step_into, opts)
-km('n', '<F12>', dap.step_out, opts)
+kh.map('n', '<F5>', dap.continue, kh.default_opts 'DAP: Run/Continue')
+kh.map('n', '<F10>', dap.step_over, kh.default_opts 'DAP: Step Over')
+kh.map('n', '<F11>', dap.step_into, kh.default_opts 'DAP: Step Into')
+kh.map('n', '<F12>', dap.step_out, kh.default_opts 'DAP: Step Out')
+

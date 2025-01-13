@@ -1,17 +1,43 @@
 return {
-  { 'folke/lazy.nvim' },
   {
     'rebelot/kanagawa.nvim',
     lazy = false,
     priority = 1000,
-    config = function()
-      require('ext.kanagawa')
-    end
-  },
-  {
-    'goolord/alpha-nvim',
-    config = function()
-      require('ext.alpha')
+    opts = {
+      compile = false,
+      undercurl = true,
+      commentStyle = { italic = true },
+      functionStyle = {},
+      keywordStyle = { italic = true},
+      statementStyle = { bold = true },
+      typeStyle = {},
+      transparent = true,
+      dimInactive = false,
+      terminalColors = true,
+      colors = {
+        palette = {},
+        theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+      },
+      overrides = function(colors)
+        local theme = colors.theme
+        return {
+          NormalFloat = { bg = 'none' },
+          FloatBorder = { bg = 'none' },
+          FloatTitle = { bg = 'none' },
+          NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
+          LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+          MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+        }
+      end,
+      theme = 'dragon',
+      background = {
+        dark = 'dragon',
+        light = 'lotus'
+      },
+    },
+    config = function(_, opts)
+      require('kanagawa').setup(opts)
+      vim.cmd 'colorscheme kanagawa'
     end
   },
   {
@@ -19,123 +45,167 @@ return {
     branch = 'v3.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+      'nvim-tree/nvim-web-devicons',
       'MunifTanjim/nui.nvim',
-      -- '3rd/image.nvim', -- Optional image support in preview window: See `# Preview Mode` for more information
     },
-    config = function()
-      require('ext.neotree')
+    opts = {
+      close_if_last_window = true,
+      filesystem = {
+        filtered_items = {
+          visible = false,
+          hide_dotfiles = false,
+          hide_gitignored = false,
+          hide_by_name = {
+            '.git'
+          },
+        },
+        follow_current_file = {
+          enabled = true,
+        },
+      },
+      event_handlers = {
+        {
+          event = 'file_opened',
+          handler = function()
+            require('neo-tree.command').execute({ action = 'close' })
+          end
+        },
+      }
+    },
+    config = function(_, opts)
+      require('neo-tree').setup(opts)
+      require('keymaps.neo-tree')
     end
   },
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     lazy = false,
-    config = function()
-      require('ext.lualine')
-    end
-  },
-  {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
+    opts = {
+      options = {
+        theme = 'auto',
+        icons_enable = true,
+      },
+      sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch', 'diff', 'diagnostics' },
+        lualine_c = { 'filename' },
+        lualine_x = { 'encoding', 'fileformat', 'filetype' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' },
+      },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { 'filename' },
+        lualine_x = { 'location' },
+        lualine_y = {},
+        lualine_z = {}
+      },
+      tabline = {},
+      extensions = { 'nvim-tree' },
+    },
   },
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.2',
+    event = 'VimEnter',
+    branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons',
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make',
+        cond = vim.fn.executable 'make' == 1,
+      },
+      'nvim-telescope/telescope-ui-select.nvim',
+      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
-    config = function()
-      require('ext.telescope')
+    opts = {
+      extensions = {
+        ['ui-select'] = {
+          -- require('telescope.themes').get_dropdown(),
+        },
+      },
+    },
+    config = function(_, opts)
+      local telescope = require('telescope')
+      telescope.setup(opts)
+      pcall(telescope.load_extension, 'fzf')
+      pcall(telescope.load_extension, 'ui-select')
+      require('keymaps.telescope')
     end
   },
   {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
-    config = function()
-      require('ext.treesitter')
-    end
+    build = ':TSUpdate',
+    opts = {
+      ensure_installed = { 'lua', 'bash', 'c', 'cpp', 'cmake', 'go', 'dockerfile', 'javascript', 'json', 'vim', 'vimdoc', 'rust', 'elixir', 'python' },
+      auto_install = true,
+      modules = {},
+      sync_install = false,
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+      },
+      indent = { enable = true },
+    },
   },
   {
     'windwp/nvim-autopairs',
-    config = function()
-      require('ext.autopairs')
-    end
+    event = 'InsertEnter',
+    opts = {
+      check_ts = true,
+    },
   },
   {
     'williamboman/mason.nvim',
+    cmd = { 'Mason', 'MasonInstall', 'MasonInstallAll', 'MasonUpdate' },
+    opts = {
+      max_concurrent_installers = 10,
+    },
+    config = function(_, opts)
+      require('mason').setup(opts)
+    end
+  },
+  {
+    'williamboman/mason-lspconfig.nvim',
     dependencies = {
-      'williamboman/mason-lspconfig.nvim',
       'neovim/nvim-lspconfig',
-      'mfussenegger/nvim-dap',
-      'nvim-neotest/nvim-nio',
-      'jay-babu/mason-nvim-dap.nvim',
-      'rcarriga/nvim-dap-ui',
       'p00f/clangd_extensions.nvim',
     },
     config = function()
-      require('ext.mason-lsp')
-    end
-  },
-  {
-    'stevearc/conform.nvim',
-    config = function()
-      require('ext.conform')
-    end
-  },
-  {
-    'mfussenegger/nvim-dap',
-    config = function()
-      require('ext.dap')
-    end
+      require('ext.lsp')
+    end,
   },
   {
     'rcarriga/nvim-dap-ui',
-    dependencies = { 'mfussenegger/nvim-dap' },
+    dependencies = {
+      'mfussenegger/nvim-dap',
+      'nvim-neotest/nvim-nio',
+      'theHamsta/nvim-dap-virtual-text',
+      'leoluz/nvim-dap-go',
+    },
     config = function()
-      local dap, dapui = require('dap'), require('dapui')
-      dapui.setup()
-      dap.listeners.after.event_initialized['dapui_config'] = function() dapui.open() end
-      dap.listeners.before.event_terminated['dapui_config'] = function() dapui.close() end
-      dap.listeners.before.event_exited['dapui_config'] = function() dapui.close() end
-      require('keymaps.dapui')
-    end
-  },
-  {
-    'theHamsta/nvim-dap-virtual-text',
-    config = function()
-      require('nvim-dap-virtual-text').setup({})
-    end
-  },
-  {
-    'leoluz/nvim-dap-go',
-    config = function()
-      require('dap-go').setup()
+      require('keymaps.dap')
     end
   },
   {
     'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
     dependencies = {
-      'neovim/nvim-lspconfig',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
-      'L3MON4D3/LuaSnip',
+      {
+        'L3MON4D3/LuaSnip',
+        build = function()
+          if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then return end
+          return 'make install_jsregexp'
+        end
+      },
       'saadparwaiz1/cmp_luasnip',
-      'onsails/lspkind-nvim',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-path',
     },
     config = function()
-      require('ext.complite')
-    end
-  },
-  {
-    'akinsho/bufferline.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    version = '*',
-    config = function()
-      require('ext.bufferline')
+      require('ext.cmp')
     end
   }
 }

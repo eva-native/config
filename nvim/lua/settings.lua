@@ -1,65 +1,74 @@
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.cursorline = true
-vim.opt.wrap = false
-vim.opt.scrolloff = 8
-vim.opt.sidescrolloff = 8
+local opt = vim.opt
 
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.softtabstop = 2
-vim.opt.expandtab = true
-vim.opt.smartindent = true
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
-vim.opt.ignorecase = false
-vim.opt.smartcase = true
-vim.opt.incsearch = true
-vim.opt.hlsearch = true
+-- nerd fonts
+vim.g.have_nerd_font = true
 
-vim.opt.clipboard = 'unnamedplus'
+opt.mouse = 'a'
 
-vim.opt.hidden = true
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-vim.opt.termguicolors = true
-vim.opt.signcolumn='yes'
+opt.number = true
+opt.showmode = false
+opt.lazyredraw = true
+opt.showtabline = 2
 
-vim.opt.swapfile = false
+vim.schedule(function()
+  opt.clipboard = 'unnamedplus'
+end)
 
-vim.opt.completeopt = "menu,menuone,noselect"
+opt.tabstop = 2
+opt.shiftwidth = 2
+opt.softtabstop = 2
+opt.expandtab = true
+opt.breakindent = true
+opt.smartindent = true
 
-vim.opt.timeoutlen = 500            -- Время ожидания клавиатурной комбинации (мс)
-vim.opt.updatetime = 300            -- Время ожидания перед обновлением (мс)
+opt.ignorecase = false
+opt.smartcase = true
+opt.incsearch = true
+opt.hlsearch = true
 
-vim.opt.showtabline = 2             -- Всегда показывать линию вкладок
-vim.opt.cmdheight = 2               -- Высота командной строки (чтобы видеть больше сообщений)
+opt.hidden = true
+opt.splitbelow = true
+opt.splitright = true
+opt.termguicolors = true
+opt.signcolumn = 'yes'
+opt.updatetime = 250
+opt.timeoutlen = 300
+opt.splitbelow = true
+opt.splitright = true
 
-vim.opt.lazyredraw = true
-vim.opt.showmode = false
-vim.opt.laststatus = 2              -- Всегда показывать статусную строку
-vim.opt.shortmess:append("c")       -- Не показывать лишние сообщения об автодополнении
-vim.opt.mouse = "a"
+opt.list = true
+opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', extends = '⟩', precedes = '⟨' }
 
-vim.opt.list = true                 -- Включить отображение специальных символов
-vim.opt.listchars = { trail = '·', tab = '▸ ', extends = '⟩', precedes = '⟨', nbsp = '␣' }
-vim.opt.colorcolumn = "120"
+opt.cursorline = true
+opt.scrolloff = 10
 
-vim.opt.confirm = true              -- Подтверждать закрытие файлов с несохраненными изменениями
-vim.opt.autoread = true             -- Автоматически перечитывать файл, если он изменен извне
+opt.inccommand = 'split'
 
-vim.opt.formatoptions:remove("cro") -- Отключить автозакрытие комментариев при вставке текста
-vim.opt.sessionoptions = "buffers,curdir,tabpages,winsize" -- Настройки для сессий
+opt.swapfile = false
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+opt.confirm = true
+opt.autoread = true
 
 require('keymaps.system')
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('highlight yank', {clear = true}),
   callback = function()
     vim.highlight.on_yank()
+  end
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('uzxftgrp', {}),
+  desc = 'Use tabs based on FileType',
+  pattern = 'go',
+  callback = function()
+    vim.bo.expandtab = false
+    vim.bo.softtabstop = 0
+    vim.bo.shiftwidth = 0
   end
 })
 
