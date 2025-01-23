@@ -186,7 +186,8 @@ return {
       'leoluz/nvim-dap-go',
     },
     config = function()
-      require('keymaps.dap')
+      local dap, dapui = require('dap'), require('dapui')
+      require('keymaps.dap').setup(dap, dapui)
     end
   },
   {
@@ -209,12 +210,16 @@ return {
     end
   },
   {
-    'echasnovski/mini.jump2d',
-    version = false,
-    config = function()
-      require('mini.jump2d').setup {
-        mappings = require('keymaps.jump2d')
-      }
+    'smoka7/hop.nvim',
+    version = "*",
+    event = 'BufRead',
+    opts = {
+      keys = 'etovxqpdygfblzhckisuran',
+    },
+    config = function(_, opts)
+      local hop = require('hop')
+      hop.setup()
+      require('keymaps.hop').setup(hop)
     end
   },
 }
