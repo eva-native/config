@@ -21,6 +21,7 @@ M.setup_lsp_keymaps = function(bufnr)
   kh.map('n', 'gD', vim.lsp.buf.declaration, opts 'Go to declaration')
   kh.map('n', 'gd', vim.lsp.buf.definition, opts 'Go to definition')
   kh.map('n', 'gi', vim.lsp.buf.implementation, opts 'Go to implementation')
+  kh.map('n', 'gr', vim.lsp.buf.references, opts 'Go to references')
 
   kh.map('n', '<C-k>', vim.lsp.buf.signature_help, opts 'Signature help')
   kh.map('n', 'K', vim.lsp.buf.hover, opts 'Hover documentation')

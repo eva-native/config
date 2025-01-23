@@ -207,5 +207,14 @@ return {
     config = function()
       require('ext.cmp')
     end
-  }
+  },
+  {
+    'echasnovski/mini.jump2d',
+    version = false,
+    config = function()
+      require('mini.jump2d').setup {
+        mappings = require('keymaps.jump2d')
+      }
+    end
+  },
 }
