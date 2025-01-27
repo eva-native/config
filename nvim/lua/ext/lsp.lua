@@ -10,7 +10,7 @@ local clangd_ext_avail, clangd_ext = pcall(require, 'clangd_extensions.inlay_hin
 
 lsp.setup {
   ensure_installed = {
-    'clangd', 'gopls', 'rust_analyzer', 'bashls', 'lua_ls', 'pyright'
+    'clangd', 'gopls', 'rust_analyzer', 'bashls', 'lua_ls', 'pyright',
   },
   handlers = {
     function(server_name)
