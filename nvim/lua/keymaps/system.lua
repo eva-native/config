@@ -23,5 +23,6 @@ kh.map('n', '<leader>tm', '<cmd>-tabmove<CR>',    kh.default_opts 'Move tab left
 kh.map('n', '<leader>tM', '<cmd>+tabmove<CR>',    kh.default_opts 'Move tab right')
 
 kh.map('n', '<leader>tt', '<cmd>split | terminal<CR>', kh.default_opts 'Enter to terminal mode')
-kh.map('t', '<Esc><Esc>', '<cmd>q<CR>', kh.default_opts 'Exit terminal mode')
+kh.map('t', '<Esc><Esc>', '<cmd>q<CR>', kh.default_opts 'Exit from terminal mode')
+kh.map('t', '<Esc>', '<C-\\><C-n>', kh.default_opts 'Go to normal mode from terminal mode')
 
