@@ -1,0 +1,16 @@
+alias v="nvim"
+alias doas="sudo"
+
+alias cat="bat"
+
+EZA_OPTS="--long --classify=auto --color=auto --icons=auto --width=80 --header --binary"
+alias l="eza $EZA_OPTS"
+alias ll="eza $EZA_OPTS"
+alias la="eza --all $EZA_OPTS"
+alias l.="eza --list-dirs .* $EZA_OPTS"
+alias lsd="eza --all --list-dirs *(/) $EZA_OPTS"
+alias tree="eza --tree $EZA_OPTS"
+
+alias bc="bc -l"
+
+alias tns="tmux new-session -As $USER"
