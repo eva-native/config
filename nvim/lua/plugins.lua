@@ -194,10 +194,11 @@ return {
       'mfussenegger/nvim-dap',
       'nvim-neotest/nvim-nio',
       'theHamsta/nvim-dap-virtual-text',
-      'leoluz/nvim-dap-go',
+      {'leoluz/nvim-dap-go', config = true},
     },
     config = function()
       local dap, dapui = require('dap'), require('dapui')
+      dapui.setup()
       require('keymaps.dap').setup(dap, dapui)
     end
   },
