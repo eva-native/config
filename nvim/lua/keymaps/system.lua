@@ -5,7 +5,7 @@ kh.map('n', '<right>', '<cmd>echo "Use \'l\' to move!!!"<CR>')
 kh.map('n', '<down>', '<cmd>echo "Use \'j\' to move!!!"<CR>')
 kh.map('n', '<up>', '<cmd>echo "Use \'k\' to move!!!"<CR>')
 
-kh.map('n', '<Esc>', '<cmd>nohlsearch<CR>', default_opts)
+kh.map('n', '<Esc>', '<cmd>nohlsearch<CR>', kh.default_opts 'No highlight search')
 
 kh.map('n', '<C-h>', '<C-w><C-h>', kh.default_opts 'Move focus to the left window')
 kh.map('n', '<C-l>', '<C-w><C-l>', kh.default_opts 'Move focus to the right window')

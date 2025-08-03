@@ -11,6 +11,6 @@ alias l.="eza --list-dirs .* $EZA_OPTS"
 alias lsd="eza --all --list-dirs *(/) $EZA_OPTS"
 alias tree="eza --tree $EZA_OPTS"
 
-alias bc="bc -l"
+# alias bc="bc -l"
 
 alias tns="tmux new-session -As $USER"
