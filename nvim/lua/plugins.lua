@@ -150,7 +150,10 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'lua', 'bash', 'c', 'cpp', 'cmake', 'go', 'dockerfile', 'javascript', 'json', 'vim', 'vimdoc', 'rust', 'elixir', 'python' },
+      ensure_installed = {
+        'lua', 'bash', 'c', 'cpp', 'cmake', 'go', 'dockerfile', 'javascript',
+        'json', 'vim', 'vimdoc', 'rust', 'elixir', 'python', 'html'
+      },
       auto_install = true,
       modules = {},
       sync_install = false,
