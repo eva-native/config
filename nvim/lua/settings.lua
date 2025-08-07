@@ -52,6 +52,7 @@ opt.swapfile = false
 opt.confirm = true
 opt.autoread = true
 
+require('lsp')
 require('keymaps.system')
 
 vim.api.nvim_create_autocmd('TextYankPost', {

@@ -167,29 +167,20 @@ return {
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
-    opts = {
-      check_ts = true,
-    },
+    opts = { check_ts = true, },
   },
   {
-    'williamboman/mason.nvim',
-    cmd = { 'Mason', 'MasonInstall', 'MasonInstallAll', 'MasonUpdate' },
-    opts = {
-      max_concurrent_installers = 10,
-    },
-    config = function(_, opts)
-      require('mason').setup(opts)
-    end
-  },
-  {
-    'williamboman/mason-lspconfig.nvim',
+    'mason-org/mason-lspconfig.nvim',
     dependencies = {
+      { 'mason-org/mason.nvim', opts = { max_concurrent_installers = 10, }, },
       'neovim/nvim-lspconfig',
       'p00f/clangd_extensions.nvim',
     },
-    config = function()
-      require('ext.lsp')
-    end,
+    opts = {
+      ensure_installed = {
+        'clangd', 'gopls', 'rust_analyzer', 'bashls', 'lua_ls', 'pyright', 'html', 'htmx'
+      },
+    },
   },
   {
     'rcarriga/nvim-dap-ui',
