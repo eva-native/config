@@ -1,7 +1,16 @@
 local lsp_utils = require('util.lsp')
 local icons = require('config.icons').diagnostics
 
+---@type vim.diagnostic.Opts
 local diagnostics = {
+  underline = true,
+  update_in_insert = false,
+  virtual_text = {
+    spacing = 4,
+    source = 'if_many',
+    prefix = '●',
+  },
+  severity_sort = true,
   signs = {
     [vim.diagnostic.severity.ERROR] = icons.Error,
     [vim.diagnostic.severity.WARN] = icons.Warn,
@@ -16,12 +25,13 @@ vim.lsp.config('*', {
   capabilities = capabilities,
 })
 
-for _, bind in ipairs({ "grn", "gra", "gri", "grr", "grt", "<C-S>" }) do
+for _, bind in ipairs({ "grn", "gra", "gri", "grr", "grt", "<C-S>", "gO" }) do
   pcall(vim.keymap.del, "n", bind)
 end
 
 lsp_utils.setup()
-lsp_utils.on_attach(function (client, bufnr)
+lsp_utils.on_attach(function (_, bufnr)
+  require('config.keymap.lsp').setup(bufnr)
 end)
 
 if vim.fn.has('nvim-0.10.0') == 0 then
@@ -31,13 +41,11 @@ if vim.fn.has('nvim-0.10.0') == 0 then
   end
 end
 
-if vim.fn.has('nvim-0.10') == 1 then
-  lsp_utils.on_supports_method('textDocument/inlayHint', function (_, bufnr)
-    if vim.api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].buftype == '' then
-      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-    end
-  end)
-end
+lsp_utils.on_supports_method('textDocument/inlayHint', function (_, bufnr)
+  if vim.api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].buftype == '' then
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+  end
+end)
 
 if vim.lsp.codelens then
   lsp_utils.on_supports_method('textDocument/codeLens', function (_, bufnr)
@@ -48,4 +56,6 @@ if vim.lsp.codelens then
     })
   end)
 end
+
+vim.diagnostic.config(diagnostics)
 
