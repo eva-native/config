@@ -1,0 +1,51 @@
+local lsp_utils = require('util.lsp')
+local icons = require('config.icons').diagnostics
+
+local diagnostics = {
+  signs = {
+    [vim.diagnostic.severity.ERROR] = icons.Error,
+    [vim.diagnostic.severity.WARN] = icons.Warn,
+    [vim.diagnostic.severity.INFO] = icons.Info,
+    [vim.diagnostic.severity.HINT] = icons.Hint,
+  }
+}
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+vim.lsp.config('*', {
+  capabilities = capabilities,
+})
+
+for _, bind in ipairs({ "grn", "gra", "gri", "grr", "grt", "<C-S>" }) do
+  pcall(vim.keymap.del, "n", bind)
+end
+
+lsp_utils.setup()
+lsp_utils.on_attach(function (client, bufnr)
+end)
+
+if vim.fn.has('nvim-0.10.0') == 0 then
+  for severity, icon in pairs(diagnostics.signs) do
+    local name = 'DiagnosticSign' .. vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
+    vim.fn.sign_define(name, { text = icon, texthl = name, numhl = '' })
+  end
+end
+
+if vim.fn.has('nvim-0.10') == 1 then
+  lsp_utils.on_supports_method('textDocument/inlayHint', function (_, bufnr)
+    if vim.api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].buftype == '' then
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    end
+  end)
+end
+
+if vim.lsp.codelens then
+  lsp_utils.on_supports_method('textDocument/codeLens', function (_, bufnr)
+    vim.lsp.codelens.refresh()
+    vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+      buffer = bufnr,
+      callback = vim.lsp.codelens.refresh
+    })
+  end)
+end
+

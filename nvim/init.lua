@@ -1,2 +1,3 @@
-require('settings')
-require('lazy-bootstrap').setup(require('lazy-options'))
+require('config.options')
+require('config.lazy')
+require('config.keymap')
