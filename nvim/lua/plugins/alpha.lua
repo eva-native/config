@@ -62,7 +62,7 @@ return {
         {
           type = 'group',
           val = function ()
-            return { au.mru(0, vim.fn.getcwd(), 10) }
+            return { au.mru(0, vim.fn.getcwd(), 5) }
           end,
           opts = { shrink_margin = false }
         }

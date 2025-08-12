@@ -45,6 +45,8 @@ return {
 
         { '<leader>ss', telescope.lsp_document_symbols, desc = 'Goto symbol' },
         { '<leader>sS', telescope.lsp_dynamic_workspace_symbols, desc = 'Goto symbol (workspace)' },
+        { '<leader>sD', telescope.diagnostics, desc = 'Workspace diagnostics' },
+        { '<leader>sd', function() telescope.diagnostics({bufnr = 0}) end, desc = 'Document diagnostics' },
 
         { '<leader>gc', telescope.git_commits, desc = 'Git commits' },
         { '<leader>gs', telescope.git_status, desc = 'Git status' },

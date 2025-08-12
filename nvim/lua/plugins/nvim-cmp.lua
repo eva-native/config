@@ -7,12 +7,14 @@ return {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
+      'p00f/clangd_extensions.nvim',
     },
     opts = function()
       local cmp = require('cmp')
       local cmp_util = require('util.cmp')
       local defaults = require("cmp.config.default")()
-      return {
+
+      local opts = {
         completion = {
           completeopt = 'menu,menuone,noinsert',
         },
@@ -33,6 +35,10 @@ return {
         }),
         sorting = defaults.sorting,
       }
+
+      table.insert(opts.sorting.comparators, 1, require('clangd_extensions.cmp_scores'))
+
+      return opts
     end
   }
 }

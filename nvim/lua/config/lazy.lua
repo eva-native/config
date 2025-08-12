@@ -15,4 +15,25 @@ end
 
 vim.opt.rtp:prepend(lazy_path)
 
-require('lazy').setup('plugins')
+require('lazy').setup({
+  spec = {
+    { import = 'plugins' }
+  },
+  rocks = {
+    enabled = false,
+  },
+  performance = {
+    rtp = {
+      disable_plugins = {
+        -- 'gzip',
+        -- 'matchit',
+        -- 'matchparen',
+        'netrwPlugin',
+        -- 'tarPlugin',
+        -- 'tohtml',
+        'tutor',
+        -- 'zipPlugin',
+      }
+    },
+  }
+})

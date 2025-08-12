@@ -24,6 +24,7 @@ opt.smartindent = true
 
 opt.cursorline = true
 opt.scrolloff = 4
+opt.colorcolumn = "80"
 
 opt.list = true
 opt.listchars = {
@@ -52,6 +53,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
       higroup = 'Visual',
       on_visual = false,
     })
+  end
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Go use tabs instead space',
+  pattern = 'go',
+  callback = function ()
+    vim.bo.expandtab = false
+    vim.bo.softtabstop = 0
+    vim.bo.shiftwidth = 0
   end
 })
 
