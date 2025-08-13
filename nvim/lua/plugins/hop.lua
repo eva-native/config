@@ -29,7 +29,7 @@ return {
           direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1
         })
       end, mode = '', remap = true },
-      { 'F', function()
+      { 'T', function()
         hop.hint_char1({
           direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = -1
         })
