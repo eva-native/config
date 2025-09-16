@@ -11,7 +11,7 @@ return {
     opts = {
       ensure_installed = {
         'lua', 'bash', 'c', 'cpp', 'cmake', 'go', 'dockerfile', 'javascript',
-        'json', 'vim', 'vimdoc', 'rust', 'elixir', 'python', 'html',
+        'json', 'vim', 'vimdoc', 'rust', 'elixir', 'python', 'html', 'asm'
       },
       highlight = {
         enable = true,

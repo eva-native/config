@@ -38,7 +38,7 @@ return {
     opts = {
       ensure_installed = {
         'clangd', 'gopls', 'rust_analyzer', 'bashls', 'lua_ls', 'pyright',
-        'html', 'htmx', 'eslint', 'emmet_ls', 'cssls', 'cmake'
+        'html', 'htmx', 'eslint', 'emmet_ls', 'cssls', 'cmake', 'elixirls'
       },
     },
     config = function(_, opts)
