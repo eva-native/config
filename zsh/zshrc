@@ -17,7 +17,9 @@ rehash_precmd() {
   fi
 }
 
-add-zsh-hook -Uz precmd rehash_precmd
+if [[ -a "/var/cache/zsh/pacman" ]]; then
+  add-zsh-hook -Uz precmd rehash_precmd
+fi
 
 source ~/.zplug/init.zsh
 
@@ -48,5 +50,8 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
+
+fastfetch

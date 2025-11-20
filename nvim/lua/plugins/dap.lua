@@ -20,7 +20,7 @@ return {
       'rcarriga/nvim-dap-ui',
       { 'theHamsta/nvim-dap-virtual-text', opts = {}, },
       { 'leoluz/nvim-dap-go', config = true },
-      { 'julianolf/nvim-dap-lldb', config = true },
+      -- { 'julianolf/nvim-dap-lldb', config = true },
     },
     keys = function()
       local dap = require('dap')
@@ -31,17 +31,17 @@ return {
         { '<leader>da', function() dap.continue({ before = get_args }) end, desc = 'Run with Args' },
         { '<leader>dC', function() dap.run_to_cursor() end, desc = 'Run to cursor' },
         { '<leader>dg', function() dap.goto_() end, desc = 'Go to Line (no execute)' },
-        { '<leader>di', function() dap.step_into() end, desc = 'Step into' },
         { '<leader>dj', function() dap.down() end, desc = 'Down' },
         { '<leader>dk', function() dap.up() end, desc = 'Up' },
         { '<leader>dl', function() dap.run_last() end, desc = 'Run last' },
+        { '<leader>i', function() dap.step_into() end, desc = 'Step into' },
+        { '<leader>n', function() dap.step_over() end, desc = 'Step over' },
         { '<leader>do', function() dap.step_out() end, desc = 'Step out' },
-        { '<leader>dO', function() dap.step_over() end, desc = 'Step over' },
         { '<leader>dP', function() dap.pause() end, desc = 'Pause' },
         { '<leader>dr', function() dap.repl.toggle() end, desc = 'REPL' },
         { '<leader>ds', function() dap.session() end, desc = 'Session' },
         { '<leader>dt', function() dap.terminate() end, desc = 'Terminate' },
-        { '<leader>dw', function() require('dap.ui.widgets').hover() end, desc = 'Terminate' },
+        { '<leader>dw', function() require('dap.ui.widgets').hover() end, desc = 'Hover' },
       }
     end,
     opts = function() end,
@@ -53,6 +53,7 @@ return {
       vscode.json_decode = function(s)
         return vim.json.decode(json.json_strip_comments(s))
       end
+      require('config.dap')
     end
   },
 

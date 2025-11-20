@@ -37,6 +37,7 @@ vim.lsp.config('clangd', {
     '--completion-style=detailed',
     '--function-arg-placeholders',
     '--fallback-style=llvm',
+    '--offset-encoding=utf-16'
   },
   init_options = {
     usePlaceholders = true,
