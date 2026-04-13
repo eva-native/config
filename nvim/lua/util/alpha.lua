@@ -46,7 +46,7 @@ function M.icon_text(fn)
   if not M.opts.file_icons.enable then return '', {} end
 
   local ico, hl = M.icon(fn)
-  return ico..' ', { M.highlight(ico, hl) }
+  return ico..'  ', { M.highlight(ico, hl) }
 end
 
 function M.button(sc, txt, keybind, keybind_opts)

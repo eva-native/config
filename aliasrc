@@ -1,7 +1,7 @@
 alias v="nvim"
-alias doas="sudo"
+# alias doas="sudo"
 
-alias cat="bat"
+# alias cat="bat"
 
 EZA_OPTS="--long --classify=auto --color=auto --icons=auto --width=80 --header --binary"
 alias l="eza $EZA_OPTS"

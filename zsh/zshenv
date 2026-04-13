@@ -2,7 +2,14 @@ export EDITOR="nvim"
 export GOPATH="$HOME/.local/go"
 export PATH="$GOPATH/bin:$HOME/.local/bin:$PATH"
 
+if [[ -x "$(command -v brew)" ]]
+then
+  HOMEBREW_PREFIX="$(brew --prefix)"
+
+  export PATH="$HOMEBREW_PREFIX/bin:$PATH"
+  export LIBRARY_PATH="$HOMEBREW_PREFIX/lib"
+fi
+
 export CPM_SOURCE_CACHE="$HOME/.cache/CPM"
 . "$HOME/.cargo/env"
 
-export LIBRARY_PATH="/opt/homebrew/lib"
