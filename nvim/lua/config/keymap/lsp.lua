@@ -1,37 +1,34 @@
 local M = {}
 
-function M.get()
-  if M.keys then
-    return M.keys
-  end
+function M._get()
+  if M._keys then return M._keys end
 
   local telescope = require('telescope.builtin')
-  M.keys = {
+
+  M._keys = {
     { 'gd', telescope.lsp_definitions, desc = 'Goto definition' },
     { 'gr', telescope.lsp_references, desc = 'Goto references' },
     { 'gI', telescope.lsp_implementations, desc = 'Goto implementations' },
-    { 'gy', telescope.lsp_type_definitions, desc = 'Goto type definition' },
-    { 'gD', vim.lsp.buf.declaration, desc = 'Goto declaration' },
-    { 'go', telescope.lsp_outgoing_calls, desc = 'Goto outgoing calls' },
-    { 'gO', telescope.lsp_incoming_calls, desc = 'Goto incoming calls' },
-
-    { 'K', vim.lsp.buf.hover, desc = 'Hover' },
-    { 'gK', vim.lsp.buf.signature_help, desc = 'Signature help' },
 
     { '<leader>ca', vim.lsp.buf.code_action, desc = 'Code action' },
-    { '<leader>cc', vim.lsp.codelens.run, desc = 'Codelens' },
-    { '<leader>cC', vim.lsp.codelens.refresh, desc = 'Codelens refresh' },
-    { '<leader>cr', vim.lsp.buf.rename, desc = 'LSP Rename' },
+    { '<leader>cr', vim.lsp.buf.rename, desc = 'LSP rename' },
+    { '<leader>cf', function () vim.lsp.buf.format({ async = true }) end, desc = 'LSP format' },
+
+    { 'K', vim.lsp.buf.hover, desc = 'Hover documentation' },
+
+    { '<leader>ss', telescope.lsp_document_symbols, desc = 'Goto symbol' },
+    { '<leader>sS', telescope.lsp_dynamic_workspace_symbols, desc = 'Goto symbol (workspace)' },
+    { '<leader>sd', function() telescope.diagnostics({ bufnr = 0 }) end, desc = 'Document diagnostics' },
+    { '<leader>sD', telescope.diagnostics, desc = 'Workspace diagnostics' },
   }
-  return M.keys
 end
 
 function M.setup(bufnr)
-  local Keys = require('lazy.core.handler.keys')
-  local spec = Keys.resolve(M.get())
+  local keys = require'lazy.core.handler.keys'
+  local spec = keys.resolve(M._get())
 
   for _, key in pairs(spec) do
-    local opts = Keys.opts(key)
+    local opts = keys.opts(key)
     opts.silent = true
     opts.buffer = bufnr
     vim.keymap.set(key.mode or 'n', key.lhs, key.rhs, opts)
