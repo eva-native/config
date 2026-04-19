@@ -21,6 +21,8 @@ function M._get()
     { '<leader>sd', function() telescope.diagnostics({ bufnr = 0 }) end, desc = 'Document diagnostics' },
     { '<leader>sD', telescope.diagnostics, desc = 'Workspace diagnostics' },
   }
+
+  return M._keys
 end
 
 function M.setup(bufnr)
