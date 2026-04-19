@@ -54,4 +54,13 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
 
+if [[ -x "$(command -v brew)" ]]
+then
+  HOMEBREW_PREFIX="$(brew --prefix)"
+
+  export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
+  export PATH="$HOMEBREW_PREFIX/sbin:$PATH"
+  export LIBRARY_PATH="$HOMEBREW_PREFIX/lib"
+fi
+
 fastfetch

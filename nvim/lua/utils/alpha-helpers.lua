@@ -11,7 +11,9 @@ function M.__get_default_mru_opts()
     items_number = 10,
     target_width = 35,
     autocd = false,
-    ignore = nil,
+    ignore = function(path, ext)
+      return string.find(path, 'COMMIT_EDITMSG') or vim.tbl_contains({ 'gitcommit' }, ext)
+    end,
     cwd = nil,
   }
 
