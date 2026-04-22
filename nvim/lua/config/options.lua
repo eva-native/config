@@ -35,4 +35,7 @@ opt.hlsearch = true
 opt.inccommand = 'split'
 opt.confirm = true
 
+opt.swapfile = false
+opt.backup = false
+
 require('config.keymap.generic')
