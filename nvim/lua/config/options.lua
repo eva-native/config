@@ -26,6 +26,7 @@ opt.wrap = false
 opt.showtabline = 2
 
 vim.o.winborder = 'rounded'
+opt.pumheight = 10
 
 opt.cursorline = true
 opt.scrolloff = 10
@@ -43,3 +44,9 @@ opt.fileencoding = 'utf-8'
 opt.swapfile = false
 opt.backup = false
 opt.writebackup = false
+
+vim.filetype.add({
+  filename = {
+    [".env"] = 'sh',
+  },
+})
