@@ -1,7 +1,22 @@
 export EDITOR="nvim"
+
 export GOPATH="$HOME/.local/go"
+
+HOMEBREW_PREFIX="/opt/homebrew"
+
 export PATH="$GOPATH/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/sbin:$PATH"
 
+export CC="$HOMEBREW_PREFIX/opt/llvm/bin/clang"
+export CXX="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
+
+export LIBRARY_PATH="$HOMEBREW_PREFIX/lib"
+export LDFLAGS="-L$HOMEBREW_PREFIX/opt/llvm/lib -L/opt/homebrew/opt/llvm/lib/c++ -L/opt/homebrew/opt/llvm/lib/unwind -lunwind"
+export CPPFLAGS="-I$HOMEBREW_PREFIX/opt/llvm/include -D_LIBCPP_DISABLE_AVAILABILITY"
+
+export CMAKE_PREFIX_PATH="$HOMEBREW_PREFIX/opt/llvm"
 export CPM_SOURCE_CACHE="$HOME/.cache/CPM"
-. "$HOME/.cargo/env"
 
+. "$HOME/.cargo/env"

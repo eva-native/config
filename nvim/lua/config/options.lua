@@ -3,39 +3,43 @@ local opt = vim.opt
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
 
-vim.schedule(function()
-  opt.clipboard = 'unnamedplus'
-end)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 opt.mouse = 'a'
+opt.clipboard = 'unnamedplus'
+opt.timeoutlen = 300
+opt.confirm = true
 
+opt.termguicolors = true
 opt.number = true
 opt.relativenumber = true
-
-opt.showtabline = 2
+opt.signcolumn = 'yes'
 
 opt.shiftwidth = 2
 opt.softtabstop = 2
 opt.tabstop = 8
 opt.expandtab = true
 
-opt.termguicolors = true
-
-opt.cursorline = true
-opt.signcolumn = "yes"
-opt.scrolloff = 10
-opt.colorcolumn = '80'
 opt.wrap = false
 
-opt.timeoutlen = 300
+opt.showtabline = 2
 
-opt.ignorecase = false
+vim.o.winborder = 'rounded'
+
+opt.cursorline = true
+opt.scrolloff = 10
+opt.colorcolumn = '80'
+
+
+opt.ignorecase = true
 opt.incsearch = true
 opt.hlsearch = true
-opt.inccommand = 'split'
-opt.confirm = true
+opt.smartcase = true
 
+opt.inccommand = 'split'
+
+opt.fileencoding = 'utf-8'
 opt.swapfile = false
 opt.backup = false
-
-require('config.keymap.generic')
+opt.writebackup = false

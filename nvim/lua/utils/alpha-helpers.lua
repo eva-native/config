@@ -60,25 +60,13 @@ function M.__shorten_path(file_path, cwd, target_width)
     return short_path
   end
 
-  short_path = plenary.new(short_path):shorten(1, {-2, -1})
+  short_path = plenary.new(short_path):shorten(1, { -2, -1 })
   if #short_path <= target_width then
     return short_path
   end
 
-  short_path = plenary.new(short_path):shorten(1, {-1})
+  short_path = plenary.new(short_path):shorten(1, { -1 })
   return short_path
-end
-
-function M.__get_file_icon(file)
-  local utils = require('alpha.utils')
-  local ico, hl = utils.get_file_icon(M.opts.file_icons.provider, file)
-
-  if ico == '' then
-    vim.notify('alpha: icon provider disabled file icons', vim.log.levels.WARN)
-    return '', ''
-  end
-
-  return ico, hl
 end
 
 function M.__file_button(fn, sc, short_fn, opts)
@@ -121,7 +109,7 @@ function M.mru(start, opts)
   return {
     type = 'group',
     val = buttons,
-    opts = { }
+    opts = {}
   }
 end
 

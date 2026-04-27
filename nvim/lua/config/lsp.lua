@@ -16,6 +16,18 @@ lsp.config('lua_ls', {
         library = {
           vim.env.VIMRUNTIME,
         }
+      },
+      completion = {
+        callSnippet = 'Both',
+      },
+      format = {
+        enable = false,
+      },
+      hint = {
+        enable = true,
+      },
+      telemetry = {
+        enable = false,
       }
     }
   }
@@ -25,9 +37,15 @@ lsp.config('clangd', {
   cmd = { 'clangd', '--background-index', '--clang-tidy' },
 })
 
+lsp.config('cmake', {
+  cmd = { 'cmake-language-server' },
+})
+
 vim.diagnostic.config({
-  virtual_text = true,
-  virtual_lines = {
-    current_line = true
-  }
+  virtual_text = { current_line = false },
+  virtual_lines = { current_line = true },
+})
+
+vim.lsp.enable({
+  'lua_ls', 'clangd', 'bashls', 'gopls', 'pyright', 'cmake'
 })

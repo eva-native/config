@@ -1,4 +1,4 @@
-require'config.options'
-require'config.lazy'
-require'config.lsp'
-require'config.plugins'
+require('config.options')
+require('config.keymap.generic')
+require('config.lazy')
+require('config.lsp')

@@ -1,15 +1,15 @@
 local map = vim.keymap.set
 
 -- Self control
-map('n', '<left>',  '<cmd>echo "Use h to move!!!"<CR>', { desc = 'No arrows - use h' })
+map('n', '<left>', '<cmd>echo "Use h to move!!!"<CR>', { desc = 'No arrows - use h' })
 map('n', '<right>', '<cmd>echo "Use l to move!!!"<CR>', { desc = 'No arrows - use l' })
-map('n', '<down>',  '<cmd>echo "Use j to move!!!"<CR>', { desc = 'No arrows - use j' })
-map('n', '<up>',    '<cmd>echo "Use k to move!!!"<CR>', { desc = 'No arrows - use k' })
+map('n', '<down>', '<cmd>echo "Use j to move!!!"<CR>', { desc = 'No arrows - use j' })
+map('n', '<up>', '<cmd>echo "Use k to move!!!"<CR>', { desc = 'No arrows - use k' })
 
-map('v', '<left>',  '<Nop>', { desc = 'Disable left arrow' })
+map('v', '<left>', '<Nop>', { desc = 'Disable left arrow' })
 map('v', '<right>', '<Nop>', { desc = 'Disable right arrow' })
-map('v', '<down>',  '<Nop>', { desc = 'Disable down arrow' })
-map('v', '<up>',    '<Nop>', { desc = 'Disable up arrow' })
+map('v', '<down>', '<Nop>', { desc = 'Disable down arrow' })
+map('v', '<up>', '<Nop>', { desc = 'Disable up arrow' })
 
 -- Window managment
 map('n', '<C-h>', '<C-w>h', { desc = 'Go to left window' })
@@ -42,7 +42,7 @@ map('n', '<leader>tl', '<cmd>tabnext<CR>', { desc = 'Tab: Next' })
 map('n', '<leader>th', '<cmd>tabprevious<CR>', { desc = 'Tab: Previous' })
 
 for i = 1, 9 do
-  map('n', '<leader>t'..i, i..'gt', { desc = 'Tab: Go To Tab '..i })
+  map('n', '<leader>t' .. i, i .. 'gt', { desc = 'Tab: Go To Tab ' .. i })
 end
 
 map('n', '<leader>tm', '<cmd>tabmove<CR>', { desc = 'Tab: Move to end' })

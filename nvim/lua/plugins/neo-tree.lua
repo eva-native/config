@@ -1,12 +1,12 @@
 return {
   'nvim-neo-tree/neo-tree.nvim',
   branch = 'v3.x',
+  cmd = 'Neotree',
   dependencies = {
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
     'nvim-tree/nvim-web-devicons',
   },
-  lazy = false,
   opts = {
     window = {
       mappings = {
@@ -17,7 +17,7 @@ return {
     event_handlers = {
       {
         event = 'file_opened',
-        handler = function ()
+        handler = function()
           require 'neo-tree.command'.execute {
             action = 'close',
           }
@@ -28,7 +28,7 @@ return {
   keys = {
     {
       '<leader>e',
-      function ()
+      function()
         require 'neo-tree.command'.execute {
           toggle = true,
         }

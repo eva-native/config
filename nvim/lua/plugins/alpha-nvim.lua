@@ -2,7 +2,6 @@ return {
   'goolord/alpha-nvim',
   event = 'VimEnter',
   dependencies = {
-    'nvim-tree/nvim-web-devicons',
     'nvim-lua/plenary.nvim'
   },
   config = function()
@@ -76,7 +75,7 @@ return {
         { type = 'text', val = 'quick links', opts = { hl = 'SpecialComment', position = 'center' } },
         au.button("e", "  New file", "<cmd>ene<CR>"),
         au.button("SPC f f", "󰈞  Find file"),
-        au.button("SPC f g", "󰊄  Live grep"),
+        au.button("SPC s g", "󰊄  Live grep"),
         au.button("c", "  Configuration", "<cmd>execute 'cd' stdpath('config')<CR>"),
         au.button("u", "  Update plugins", "<cmd>Lazy sync<CR>"),
         au.button("q", "󰅚  Quit", "<cmd>qa<CR>"),

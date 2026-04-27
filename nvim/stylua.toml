@@ -1,0 +1,7 @@
+indent_type = "Spaces"
+indent_width = 2
+column_width = 80
+quote_style = "ForceSingle"
+space_after_function_names = "Never"
+[sort_requires]
+enabled = false
