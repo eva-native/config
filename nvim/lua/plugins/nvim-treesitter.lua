@@ -29,20 +29,20 @@ return {
     init = function()
       vim.g.no_plugin_maps = true
     end,
-    config = function()
-      require('nvim-treesitter-textobjects').setup({
-        select = {
-          lookahead = true,
-          selection_modes = {
-            ['@parameter.outer'] = 'v',
-            ['@function.outer'] = 'V',
-            ['@class.outer'] = 'V',
-          },
+    opts = {
+      select = {
+        lookahead = true,
+        selection_modes = {
+          ['@parameter.outer'] = 'v',
+          ['@function.outer'] = 'V',
+          ['@class.outer'] = 'V',
         },
-        move = { set_jumps = true },
-      })
-
-      local select_textobject = require('nvim-treesitter-textobjects.select').select_textobject
+      },
+      move = { set_jumps = true },
+    },
+    keys = function()
+      local select_textobject =
+        require('nvim-treesitter-textobjects.select').select_textobject
       local move = require('nvim-treesitter-textobjects.move')
       local swap = require('nvim-treesitter-textobjects.swap')
 
