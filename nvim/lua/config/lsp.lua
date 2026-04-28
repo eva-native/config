@@ -9,6 +9,13 @@ utils.on_attach(function (_, bufnr)
   require'config.keymap.lsp'.setup(bufnr)
 end)
 
+local ok, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
+if ok then
+  lsp.config('*', {
+    capabilities = cmp_lsp.default_capabilities(),
+  })
+end
+
 lsp.config('lua_ls', {
   settings = {
     Lua = {

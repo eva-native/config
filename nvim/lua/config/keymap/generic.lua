@@ -1,10 +1,13 @@
 local map = vim.keymap.set
 
+-- Search
+map('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear search highlight' })
+
 -- Self control
-map('n', '<left>', '<cmd>echo "Use h to move!!!"<CR>', { desc = 'No arrows - use h' })
-map('n', '<right>', '<cmd>echo "Use l to move!!!"<CR>', { desc = 'No arrows - use l' })
-map('n', '<down>', '<cmd>echo "Use j to move!!!"<CR>', { desc = 'No arrows - use j' })
-map('n', '<up>', '<cmd>echo "Use k to move!!!"<CR>', { desc = 'No arrows - use k' })
+map('n', '<left>',  '<Nop>', { desc = 'Disabled - use h' })
+map('n', '<right>', '<Nop>', { desc = 'Disabled - use l' })
+map('n', '<down>',  '<Nop>', { desc = 'Disabled - use j' })
+map('n', '<up>',    '<Nop>', { desc = 'Disabled - use k' })
 
 map('v', '<left>', '<Nop>', { desc = 'Disable left arrow' })
 map('v', '<right>', '<Nop>', { desc = 'Disable right arrow' })
@@ -49,4 +52,4 @@ map('n', '<leader>tm', '<cmd>tabmove<CR>', { desc = 'Tab: Move to end' })
 map('n', '<leader>t<', '<cmd>-tabmove<CR>', { desc = 'Tab: Move Left' })
 map('n', '<leader>t>', '<cmd>+tabmove<CR>', { desc = 'Tab: Move Right' })
 
-map('n', '<leader>q', '<cmd>close<CR>', { desc = 'Close window' })
+map('n', '<leader>wc', '<cmd>close<CR>', { desc = 'Close window' })
