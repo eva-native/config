@@ -19,7 +19,7 @@ return {
 
     require('luasnip.loaders.from_vscode').lazy_load()
     require('luasnip.loaders.from_lua').load({
-      paths = { vim.fn.stdpath('config') .. '/snippet' }
+      paths = { vim.fn.stdpath('config') .. '/snippet' },
     })
 
     local conf = {
@@ -65,6 +65,33 @@ return {
       }),
       formatting = {
         format = function(entry, vim_item)
+          vim_item.kind = ({
+            Text = '',
+            Method = '󰆧',
+            Function = '󰊕',
+            Constructor = '',
+            Field = '󰇽',
+            Variable = '󰂡',
+            Class = '󰠱',
+            Interface = '',
+            Module = '',
+            Property = '󰜢',
+            Unit = '',
+            Value = '󰎠',
+            Enum = '',
+            Keyword = '󰌋',
+            Snippet = '',
+            Color = '󰏘',
+            File = '󰈙',
+            Reference = '',
+            Folder = '󰉋',
+            EnumMember = '',
+            Constant = '󰏿',
+            Struct = '',
+            Event = '',
+            Operator = '󰆕',
+            TypeParameter = '󰅲',
+          })[vim_item.kind]
           vim_item.menu = ({
             nvim_lsp = '[LSP]',
             luasnip = '[Snip]',
